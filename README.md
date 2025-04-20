@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 Tamatem Store - Frontend
 
-## Getting Started
+A responsive and authenticated client application built with **Next.js** for the Tamatem Store backend API.
 
-First, run the development server:
+This app allows users to log in, view products, filter by location, make purchases, and view order receipts — all secured via JWT authentication.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Features
+
+- 🔐 JWT-based authentication using access & refresh tokens
+- 🌍 Product listing with pagination and filtering by location (`JO` / `SA`)
+- 📄 Product details with purchase button
+- 🧾 Receipt page after purchase
+- 🔄 Automatic token refreshing via interceptor
+- 🔒 Protected routes with middleware and `AuthGuard`
+- 💅 Styled using Tailwind CSS
+
+---
+
+## 📦 Tech Stack
+
+- [Next.js 15](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Axios](https://axios-http.com/)
+- [JWT Decode](https://www.npmjs.com/package/jwt-decode)
+- [js-cookie](https://www.npmjs.com/package/js-cookie)
+
+---
+
+## 🧑‍💻 Getting Started
+
+### 1. Clone the repo
+
+```
+    git clone git@github.com:ManarAbdelkarim/tamatem-frontend.git
+    cd tamatem-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
+### 3. Run the development server
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+npm run dev
+```
 
-## Learn More
+Open http://localhost:3000 in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+Make sure the backend API is running on http://localhost:8000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Route                     | Description
+---------------------------|------------------------------------------
+/login                    | Login page (username/password)
+/products                 | List all products (with filtering)
+/products/:id             | Product details page
+/products/:id/receipt?order=| Receipt page after purchase
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔐 Authentication Flow
 
-## Deploy on Vercel
+- On login, access & refresh tokens are stored in localStorage and access_token in cookie
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Protected pages check token validity using:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    - Axios interceptor (for API calls)
+
+    - AuthGuard component (for route-level protection)
+
+- If the token is expired and refresh token is valid, a new token is fetched automatically
+
+## ✨ Author
+**Manar Abdelkarim**
+
+**GitHub: @ManarAbdelkarim**
+
